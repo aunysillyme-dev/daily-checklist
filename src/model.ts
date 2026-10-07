@@ -54,7 +54,7 @@ export function escapeHtml(value: string) { return value.replace(/[&<>"']/g, ch=
 export function sortTasks(tasks: Task[]) { return [...tasks].sort((a,b)=>Number(a.done)-Number(b.done) || Number(b.urgent)-Number(a.urgent) || (a.date||'9999').localeCompare(b.date||'9999') || (a.time||'99').localeCompare(b.time||'99') || a.created-b.created); }
 function icalText(s: string) { return s.replace(/\\/g,'\\\\').replace(/\r?\n/g,'\\n').replace(/;/g,'\\;').replace(/,/g,'\\,'); }
 export function calendarFile(tasks: Task[]) {
-  const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Auny//Daily checklist//EN','CALSCALE:GREGORIAN'];
+  const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//WILL DO//Daily checklist//EN','CALSCALE:GREGORIAN'];
   for(const t of tasks.filter(t=>t.date && !t.done)) {
     const stamp=t.date.replaceAll('-','');
     const end=localDate(t.date); end.setDate(end.getDate()+1);

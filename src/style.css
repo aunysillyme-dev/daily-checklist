@@ -3,3 +3,25 @@
 @media(min-width:1400px){main{padding-top:48px}.day-card{min-height:712px}}@media(max-width:1050px){.workspace{grid-template-columns:290px minmax(0,1fr);gap:18px}.day-card{padding:22px}.task-options{grid-template-columns:1fr 1fr}.task-options .checkbox-label{align-self:end;padding-bottom:12px}.page-heading{align-items:flex-start}.connection-tools{max-width:220px}.all-tasks{padding:22px}.save-status{display:none}.task-actions{flex-direction:column}.day-heading h2{font-size:21px}.completion>span{font-size:24px}.all-heading{align-items:flex-start;flex-wrap:wrap}}
 @media(max-width:760px){.topbar{height:68px;padding:0 20px;gap:18px}.wordmark{font-size:26px}.wordmark img{width:30px;height:38px}.app-label{padding-left:18px;font-size:12px}.header-tools{gap:2px}.header-tools .icon-button{width:32px;height:32px}main{padding:28px 18px 0}.page-heading{gap:20px;flex-direction:column;margin-bottom:24px}h1{font-size:35px}.eyebrow{font-size:11px}.connection-tools{max-width:100%;justify-content:flex-start}.connection-tools .secondary{font-size:13px}.workspace{display:flex;flex-direction:column;gap:20px}.workspace aside{display:contents}.calendar-card{padding:18px}.calendar-grid{gap:5px}.day{min-height:39px}.calendar-legend{justify-content:center;gap:26px}.detail-placeholder{display:none}.day-card{width:100%;padding:20px;min-height:580px}.day-heading h2{font-size:21px}.day-meta{font-size:13px}.add-form{padding:12px}.quick-add{gap:7px}.quick-add .primary{font-size:13px;padding:10px 12px}.quick-add .primary svg{width:16px;height:16px}.quick-add input{font-size:14px}.task-options{gap:10px}.task-row{padding:13px 11px;gap:10px}.task-title{font-size:14px}.task-actions{gap:3px}.all-tasks{padding:20px}.all-heading{gap:18px}.list-filters{width:100%;flex-wrap:wrap}.search-field{flex:1;min-width:140px}.list-filters select{width:140px}.tabs{gap:2px}.tabs button{padding:7px 9px;font-size:12px}.day-footer{gap:10px}.day-footer>span{width:100%}.site-footer{gap:8px;flex-direction:column;align-items:flex-start}.agenda-card{order:4}.detail-card{order:3}.calendar-card{order:1}.day-card{order:2}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* WILL DO: task-first color, paper depth, and purposeful graphics. */
+body{background:radial-gradient(ellipse at 95% 3%,#FD8D0C14,transparent 36%),radial-gradient(ellipse at 0% 48%,#2A9D8F10,transparent 40%),var(--cream)}
+.topbar{background:#0B1121;color:var(--cream);border-bottom:4px solid var(--orange);box-shadow:0 4px 20px #0B112115}
+.wordmark{font-size:26px;letter-spacing:-.055em;white-space:nowrap}.wordmark .brand-dot{color:var(--orange)}
+.wordmark img{background:var(--cream);border-radius:10px;padding:4px;width:40px;height:44px}
+.app-label,.save-status{color:#FAF5EEbb}.app-label{border-color:#FAF5EE33}.topbar .icon-button:hover{background:#FAF5EE19}
+.page-heading{position:relative;gap:20px}.heading-art{width:150px;height:115px;object-fit:contain;margin-left:auto;flex:none}
+.connection-tools{margin-left:0}.page-heading h1{font-size:48px}.heading-dot{color:var(--orange)}
+.card{box-shadow:0 7px 0 -4px #0B112110,0 12px 26px -18px #0B112142;border-color:#0B11211f}
+.calendar-card{border-top:4px solid var(--teal)}.month-nav h2{color:var(--navy)}
+.day-card{border-top:4px solid var(--orange)}.completion{background:#FD8D0C17;border-radius:12px;padding:9px 14px}.completion>span{color:var(--navy)}
+progress{accent-color:var(--teal)}.day-heading .eyebrow{color:var(--teal-dark)}
+.add-form{background:linear-gradient(135deg,#ffffff,#FAF5EE);border-color:#FD8D0C55}
+.task-row{background:#fffdf9;box-shadow:0 3px 8px #0B112108}.task-row.is-urgent{border-left:4px solid var(--orange)}
+.task-row.is-done{background:#2A9D8F0c}.task-tags .category{background:#2A9D8F18;color:var(--teal-dark)}
+.empty-art{width:170px;height:130px;object-fit:contain;margin:0 auto 12px;display:block}.empty-state{padding-top:24px}
+.agenda-card{background:#0B1121;color:var(--cream);border-color:#0B1121}.agenda-card p{color:#FAF5EEba}.agenda-card .field-hint{color:#FAF5EE94}.agenda-card .secondary{background:var(--cream);color:var(--navy);border-color:var(--cream)}
+.all-tasks{border-top:4px solid var(--teal)}.tabs button.active{background:var(--navy);color:var(--cream)}
+@media(max-width:1050px){.heading-art{width:110px;height:90px}.page-heading h1{font-size:42px}}
+@media(max-width:760px){.page-heading{padding-right:0;min-height:150px}.heading-art{position:absolute;right:0;top:8px;width:105px;height:82px;opacity:.9}.page-heading>div:first-child{padding-right:92px}.page-heading h1{font-size:34px}.wordmark{font-size:22px}.wordmark img{width:28px;height:32px}.topbar{gap:12px;padding:0 16px}.app-label{font-size:11px;padding-left:12px}.connection-tools{position:relative}.empty-art{width:145px;height:112px}}
+@media(max-width:390px){.app-label{display:none}.heading-art{width:84px;height:72px}.page-heading>div:first-child{padding-right:76px}.page-heading h1{font-size:31px}}
