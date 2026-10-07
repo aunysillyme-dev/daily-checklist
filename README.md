@@ -12,7 +12,7 @@ Every checklist task stays in this browser. Sign in with Google reads appointmen
 
 Open the app to load local tasks. Use **Sign in with Google** to authorize the current session. After sign-in, choose a calendar. The agenda loads for the selected day and again when you change the day, change the calendar, or press **Refresh Google Calendar**. No background jobs or unattended writes exist. Supporting browsers also expose the read-only `read_checklist` WebMCP tool for the same local checklist. Browser runtime validation is UNVERIFIED when WebMCP is unavailable.
 
-Publication is manual through Sites. Source is saved in `aunysillyme-dev/daily-checklist` and the Site source repository. Site ID: `appgprj_6ac6ac909e708191b722e07e6ad89935`. Origin: `https://auny-daily-checklist.apt-ring-6682.chatgpt.site`. New Sites are owner-private by default.
+Publication is manual through Sites. Source is saved in `aunysillyme-dev/daily-checklist` and the Site source repository. Site ID: `appgprj_6ac6ac909e708191b722e07e6ad89935`. Origin: `https://auny-daily-checklist.aunysillyme.chatgpt.site`. New Sites are owner-private by default.
 
 ## Invocation chain
 
@@ -25,7 +25,7 @@ Publishing: the Sites `site-workflow.mjs` helper runs checks and a Vite build, c
 - Node.js 22+, npm, TypeScript and Vite. Install versions are locked in `package-lock.json`.
 - Sites hosting, with `static.directory: "dist"` in `.openai/hosting.json`.
 - Inter loads from Google Fonts. The lighthouse asset is bundled locally.
-- Google Calendar requires a **Web application OAuth client**, with the Site origin above registered as an authorized JavaScript origin. The dedicated client is **Auny Daily Checklist** in project `auny-workspace-mcp`. Local previews need their own authorized origin before Google sign-in can succeed.
+- Google Calendar requires a **Web application OAuth client**, with the Site origin above registered as an authorized JavaScript origin. The dedicated client is **Auny Daily Checklist** in project `auny-workspace-mcp`. Google’s account chooser uses the existing project consent name **Auny Workspace MCP**. The chooser was verified to open from the local preview; no account grant was accepted. Local previews need their own authorized origin before Google sign-in can succeed.
 - Enable the **Google Calendar API** in the Google Cloud project. Configure the consent screen and include intended accounts as test users when the app is in Testing. Do not enable any other Google API for this app.
 - Set `VITE_GOOGLE_CLIENT_ID` when building. Its public value is `277211906106-u9rtu54m0tdm3tonig76fc63pi72t26m.apps.googleusercontent.com`. Users press **Sign in with Google**; no client-ID form is shown. A client secret is never required, accepted or embedded.
 - Sign-in requests `https://www.googleapis.com/auth/calendar.readonly` only. There is no backend and no other scope.
@@ -82,7 +82,7 @@ For Google verification, after granting consent on the published Site: sign in, 
 
 Publication from a local checkout: run `node <Sites-plugin-root>/scripts/site-workflow.mjs --project-id appgprj_6ac6ac909e708191b722e07e6ad89935` and provide a native Sites repository credential on hidden stdin, checks/build command arrays, and an absolute archive path. Pass the returned exact commit SHA and archive to native `save_version_and_deploy_private`. Poll its deployment ID to success. Never put the credential in shell arguments or files.
 
-Rollback: before replacing a live version, retain its version ID. Deploy that saved version through native Sites if rollback is needed. This first publication has no prior live version. Local browser data is not affected by a rollback.
+Rollback: before replacing a live version, retain its version ID. Deploy that saved version through native Sites if rollback is needed. Initial known-good Site version: `appgprj_6ac6ac909e708191b722e07e6ad89935~appgver_769b21b35a4881918b5a09184e9d80cd`. Local browser data is not affected by a rollback.
 
 ## Source of truth
 
