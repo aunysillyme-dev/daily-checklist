@@ -1,0 +1,20 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {dateKey,isDate,escapeHtml,calendarFile,calendarLink,parseState,sortTasks,type Task} from '../src/model.ts';
+const task:Task={id:'test-1',title:'A task',date:'2026-10-07',notes:'Notes, with a comma\nand newline',category:'Work',subcategory:'Admin',urgent:true,time:'',done:false,created:1};
+test('local calendar dates do not shift at timezone boundaries',()=>{assert.equal(dateKey(new Date(2026,0,1,0,1)),'2026-01-01');assert.equal(isDate('2026-02-30'),false);assert.equal(isDate('2028-02-29'),true);});
+test('calendar export uses exclusive end and escapes notes',()=>{const file=calendarFile([task,{...task,id:'done',done:true}]);assert.match(file,/DTSTART;VALUE=DATE:20261007/);assert.match(file,/DTEND;VALUE=DATE:20261008/);assert.match(file,/Notes\\, with a comma\\nand newline/);assert.equal(file.match(/BEGIN:VEVENT/g)?.length,1);});
+test('calendar export handles month rollover, timed tasks and utf8 folds',()=>{const f=calendarFile([{...task,date:'2026-12-31',title:'🍊'.repeat(80)},{...task,id:'timed',time:'14:30'}]);assert.match(f,/DTEND;VALUE=DATE:20270101/);assert.match(f,/DTSTART:20261007T143000/);for(const line of f.split('\r\n'))assert.ok(new TextEncoder().encode(line).length<=75);});
+test('calendar links encode untrusted titles and honor times',()=>{const u=new URL(calendarLink({...task,title:'A&B # task',time:'14:30'}));assert.equal(u.searchParams.get('text'),'A&B # task');assert.match(u.searchParams.get('dates')!,/^\d{8}T\d{6}Z\/\d{8}T\d{6}Z$/);});
+test('untrusted markup is escaped',()=>{assert.equal(escapeHtml('<img onerror="bad">'), '&lt;img onerror=&quot;bad&quot;&gt;');});
+test('import rejects malformed dates, duplicate IDs and corrupt backups',()=>{const s={version:1,tasks:[task],categories:[]};assert.equal(parseState(JSON.stringify(s)).tasks[0].id,'test-1');assert.throws(()=>parseState(JSON.stringify({...s,tasks:[task,task]})));assert.throws(()=>parseState(JSON.stringify({...s,tasks:[{...task,date:'2026-02-30'}]})));assert.throws(()=>parseState('{}'));});
+test('urgent and open tasks sort first without mutating input',()=>{const a=[{...task,id:'done',done:true},{...task,id:'normal',urgent:false},task];assert.equal(sortTasks(a)[0].id,'test-1');assert.equal(a[0].id,'done');});
+test('edits keep an unknown category and reject a blank title', async () => {
+  const model = await import('../src/model.ts');
+  const edited = model.applyTaskEdit({...task, category: 'Imported'}, {title: task.title, date: task.date, notes: 'new note', category: 'Imported', subcategory: task.subcategory, urgent: task.urgent, time: ''});
+  assert.equal(edited.category, 'Imported');
+  assert.equal(edited.notes, 'new note');
+  assert.equal(model.categoryChoices(['Personal'], 'Imported').includes('Imported'), true);
+  assert.throws(() => model.applyTaskEdit(task, {title: '   ', date: task.date, notes: task.notes, category: task.category, subcategory: task.subcategory, urgent: false, time: ''}), /title/i);
+  assert.throws(() => parseState(JSON.stringify({version:1, tasks:[task], categories:[{name:'   ', children:[]}]})), /backup/i);
+});
