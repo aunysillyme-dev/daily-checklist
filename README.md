@@ -1,5 +1,7 @@
 # WILL DO
 
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/aunysillyme-dev/daily-checklist/badge)](https://scorecard.dev/viewer/?uri=github.com/aunysillyme-dev/daily-checklist)
+
 A personal calendar and checklist in the [aunysillyme.com](https://aunysillyme.com) brand: cream, navy, orange, teal, Inter and the original lighthouse mark.
 
 ## What and why
